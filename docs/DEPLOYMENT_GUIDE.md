@@ -2,37 +2,32 @@
 
 ## 1. Unzip the repository
 
-Extract `Teen-Rights-Law-App-GitHub.zip`. The extracted folder should contain `streamlit_app.py`, `requirements.txt`, `src`, `data`, and the other repository files.
+Extract `Legal-Counsel-Streamlit-GitHub.zip`. The extracted files should include `streamlit_app.py`, `requirements.txt`, `src/`, `data/`, `.streamlit/`, and the other project files.
 
-## 2. Upload to GitHub
+## 2. Upload the extracted repository to GitHub
+
+A suggested repository name is `Legal-Counsel-Teen-Law-App`.
 
 ### GitHub website method
 
-1. Sign in to GitHub.
-2. Select **New repository**.
-3. Give the repository a name, such as `Teen-Rights-Law-App`.
-4. Choose public or private visibility.
-5. Create the repository without adding a second README or license.
-6. Select **uploading an existing file**.
-7. Drag the extracted files and folders into the upload page.
-8. Commit the files to the `main` branch.
+1. Create a new GitHub repository.
+2. Do not add a second README or license if you plan to upload all files from this package.
+3. Extract this ZIP on your computer.
+4. Upload the extracted files and folders so that `streamlit_app.py` is at the **root** of the GitHub repository.
+5. Commit the upload to the `main` branch.
 
-The ZIP file itself should not be the only file in the repository. Streamlit needs the extracted source files.
-
-### Git command method
+### Git Bash / terminal method
 
 ```bash
 git init
 git add .
-git commit -m "Initial teen law education app"
+git commit -m "Add Legal Counsel Streamlit app"
 git branch -M main
 git remote add origin YOUR_GITHUB_REPOSITORY_URL
 git push -u origin main
 ```
 
-## 3. Confirm repository layout
-
-The repository root should look like this:
+## 3. Confirm the repository root
 
 ```text
 streamlit_app.py
@@ -41,55 +36,60 @@ README.md
 src/
 data/
 .streamlit/
+docs/
+tests/
 ```
 
-## 4. Deploy on Streamlit Community Cloud
+Do **not** upload only the ZIP file. Streamlit must be able to see the extracted `streamlit_app.py` and `requirements.txt`.
 
-1. Open `https://share.streamlit.io` and sign in with GitHub.
-2. Select **Create app**.
-3. Choose the GitHub repository and `main` branch.
+## 4. Deploy to Streamlit Community Cloud
+
+1. Sign in to Streamlit Community Cloud with GitHub.
+2. Create a new app from your GitHub repository.
+3. Select the `main` branch.
 4. Set the main file path to `streamlit_app.py`.
-5. Open **Advanced settings** and select Python 3.12 when available.
-6. Do not add secrets because this prototype does not use API keys.
-7. Select **Deploy**.
+5. Choose a supported Python version compatible with the packages in `requirements.txt` (Python 3.12 is a safe choice for this repository).
+6. No API key is required for the included local legal-learning engine.
+7. Deploy the app.
 
-## 5. Test after deployment
+## 5. Validate the migrated UI
 
-Check every navigation page:
+Open each navigation tab:
 
 - Home
-- Ask the Rights Guide
+- Voicebox
+- Chatbox
+- Minigames
 - Learn
-- Mini-Games
-- Community Lab
-- Progress and AI
-- About and Safety
+- Community
+- Progress
+- Features
 
-Also test:
+Also check:
 
-- A normal question such as `What should I save after online harassment?`
-- A privacy check by trying to post a phone number in the community lab.
-- A prohibited evasion question to confirm the app gives a safe alternative.
-- A quiz answer and progress export.
+- Legal Counsel branding and Nova assistant branding.
+- Author credit shows **Arya Patel** and mentor credit shows **Dr. Qingyang Xiao**.
+- The author's first name is not used as product/assistant branding.
+- Voicebox can capture browser audio, accept a confirmed transcript, and read a generated answer aloud.
+- Chatbox answers a general legal-learning question.
+- Mini-game answers update Progress Gavel metrics.
+- Community moderation rejects obvious personal contact information.
+- Progress export downloads JSON.
 
-## 6. Common deployment problems
+## 6. Common deployment issues
 
 ### `ModuleNotFoundError`
 
-Confirm the missing package is listed in `requirements.txt`. Do not list Python built-in libraries such as `json`, `re`, or `datetime`.
+Confirm every third-party package is listed in `requirements.txt`. Keep `src/__init__.py` in the repository.
 
 ### App cannot find `legal_topics.json`
 
-Confirm `data/legal_topics.json` exists in the repository and that the folder name remains lowercase `data`.
+Keep `data/legal_topics.json` in its current location and preserve the lowercase `data` directory name.
 
 ### Streamlit cannot find the entrypoint
 
-Set the main file path exactly to `streamlit_app.py`.
+Set the main file path exactly to `streamlit_app.py` and confirm that file is not nested inside another folder in GitHub.
 
-### App builds with an incompatible Python version
+### App contains only a ZIP file
 
-Delete and redeploy the Streamlit app, then select Python 3.12 in Advanced settings.
-
-### Repository contains only the ZIP
-
-Extract the ZIP locally and upload the individual repository files and folders.
+Extract the package before uploading it to GitHub. Streamlit Community Cloud cannot use the source if the application files remain only inside the ZIP.

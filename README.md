@@ -1,100 +1,90 @@
-# Teen Rights and Law Lab
+# Legal Counsel — Teen Legal Learning App
 
-An open-source Streamlit prototype that helps teenagers learn general legal concepts, rights, privacy, evidence preservation, and safe next steps in everyday language.
+**Legal Counsel** is an open-source, teen-friendly legal education prototype built in Python and Streamlit. The interface in this repository is a Streamlit-native migration of the supplied Legal Counsel UI design, preserving its soft teal/coral visual system, **Nova** assistant, Voicebox, Chatbox, Minigames, and Progress Gavel concepts while connecting them to the existing Python legal-learning and safety engine.
 
-**Author:** Arya Patel  
-**Mentor:** Dr. Qingyang Xiao
+> **Educational use only.** This app provides general legal information and learning support, not legal advice. Laws vary by jurisdiction, age, setting, and facts. Serious or real-world cases should be handled with a qualified local attorney, legal-aid organization, trusted adult, or emergency service as appropriate.
 
-> Educational information only. This project is not legal advice, is not a verified legal database, and should not be used during an emergency.
+## Credits
 
-## Features
+- **Author:** Arya Patel
+- **Mentor:** Dr. Qingyang Xiao
 
-- Transparent TF-IDF natural-language topic routing.
-- Teen-friendly topic cards stored in a reviewable JSON knowledge base.
-- Safety screening before every educational response.
-- Mini-games and session-only progress tracking.
-- K-means clustering of non-sensitive learning preferences.
-- A bounded epsilon-greedy activity recommender.
-- Community-post moderation for obvious privacy and safety risks.
-- Browser text-to-speech.
-- Colab-ready core-AI notebook.
-- Streamlit Community Cloud deployment files.
+The author's first name is used only in the required project credit. It is not the app name, assistant name, or product branding.
+
+## Streamlit Community Cloud
+
+The repository is ready for Streamlit Community Cloud with the entrypoint in the repository root:
+
+```text
+streamlit_app.py
+```
+
+Deployment steps:
+
+1. Upload the contents of this repository to GitHub.
+2. In Streamlit Community Cloud, create a new app from that GitHub repository.
+3. Choose the desired branch (usually `main`).
+4. Set **Main file path** to `streamlit_app.py`.
+5. Deploy. No API key is required for the included local legal-learning prototype.
+
+## Local launch
+
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+## Main features
+
+- Home experience modeled on the supplied UI design
+- **Nova Voicebox**: browser audio capture, transcript confirmation, and browser text-to-speech answer playback
+- **Nova Chatbox**: plain-language questions routed through a local TF-IDF topic engine
+- Safety screening for urgent or unsafe requests
+- Legal topic learning cards
+- Scenario-based minigames and quizzes
+- Progress Gavel, session XP, and topic activity
+- K-means learning-preference demonstration using non-sensitive features
+- Bounded reinforcement-learning activity recommender
+- Session-only moderated teen community prototype
+- Optional state/country context with clear jurisdiction warnings
+- Exportable session progress
 
 ## Repository structure
 
 ```text
-Teen-Rights-Law-App/
-|-- streamlit_app.py
-|-- requirements.txt
-|-- data/
-|   `-- legal_topics.json
-|-- src/
-|   |-- __init__.py
-|   `-- legal_engine.py
-|-- notebooks/
-|   `-- Teen_Law_App_Colab_Prototype.ipynb
-|-- docs/
-|   |-- DEPLOYMENT_GUIDE.md
-|   |-- IOS_APP_ROADMAP.md
-|   |-- CONTENT_REVIEW_CHECKLIST.md
-|   `-- VALIDATION_REPORT.md
-|-- tests/
-|   `-- test_legal_engine.py
-|-- .streamlit/config.toml
-|-- CONTRIBUTING.md
-|-- CODE_OF_CONDUCT.md
-|-- SECURITY.md
-`-- LICENSE
+.
+├── streamlit_app.py              # Streamlit Cloud entrypoint + migrated UI
+├── requirements.txt              # Runtime dependencies
+├── requirements-dev.txt          # Development/test dependencies
+├── src/
+│   └── legal_engine.py           # NLP router, safety guard, moderation, ML/RL demos
+├── data/
+│   └── legal_topics.json         # Reviewed educational topic/quiz content
+├── notebooks/
+│   └── Teen_Law_App_Colab_Prototype.ipynb
+├── tests/
+│   └── test_legal_engine.py
+├── docs/
+├── .streamlit/config.toml
+├── .github/workflows/tests.yml
+├── LICENSE
+├── SECURITY.md
+└── CODE_OF_CONDUCT.md
 ```
 
-## Run locally
+## Voice design note
 
-Use Python 3.11 or 3.12 for a deployment environment that is easy to reproduce.
+The app intentionally avoids requiring a paid speech API. Streamlit's browser audio capture can collect a voice question, while the user confirms/types the transcript before it is processed by the local engine. Nova's answer can then be read aloud through the browser's speech-synthesis capability. A production iOS/web release can add an on-device or privacy-reviewed speech-to-text model.
 
-```bash
-python -m venv .venv
-```
+## Privacy and teen-safety design
 
-Windows PowerShell:
+- No login is required in the prototype.
+- Learning history is kept in Streamlit session state and is not designed as a persistent teen profile.
+- Community posts are screened for common PII and high-risk content before being added to the session.
+- K-means clustering uses learning-preference scores, not sensitive demographic attributes.
+- Reinforcement learning is limited to selecting learning activities; it cannot alter legal/safety content.
 
-```powershell
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-streamlit run streamlit_app.py
-```
-
-macOS or Linux:
-
-```bash
-source .venv/bin/activate
-pip install -r requirements.txt
-streamlit run streamlit_app.py
-```
-
-## Deploy on Streamlit Community Cloud
-
-1. Create a GitHub repository and upload the contents of this folder.
-2. Confirm `streamlit_app.py` and `requirements.txt` are in the repository root.
-3. Open Streamlit Community Cloud and create a new app.
-4. Choose the repository and branch.
-5. Set the entrypoint to `streamlit_app.py`.
-6. In Advanced settings, choose a compatible Python version such as 3.12.
-7. Deploy.
-
-See `docs/DEPLOYMENT_GUIDE.md` for detailed instructions and troubleshooting.
-
-## Colab notebook
-
-Open `notebooks/Teen_Law_App_Colab_Prototype.ipynb` in Google Colab. It demonstrates the core topic router, safety guard, quiz engine, clustering, bounded reinforcement-learning recommender, moderation, and test cases without requiring a paid API.
-
-## Safety and privacy boundaries
-
-- No user login or persistent database is included.
-- The app should not collect names, contact information, precise location, school identifiers, private messages, health information, or other sensitive information in this prototype.
-- Emergency and exploitation patterns trigger a real-world-help message.
-- Reinforcement learning can only change activity recommendations.
-- Legal and safety content must be versioned and reviewed by qualified people before production use.
-
-## Open-source license
-
-The code is released under the MIT License. Educational content still needs jurisdiction-specific legal review before public reliance or commercialization.
+See `SECURITY.md`, `CODE_OF_CONDUCT.md`, and `docs/CONTENT_REVIEW_CHECKLIST.md` before extending the app.
