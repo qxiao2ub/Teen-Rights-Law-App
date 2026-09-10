@@ -1,4 +1,4 @@
-# Legal Counsel — Teen Legal Learning App
+# Legal Counsel: Teen Legal Learning App
 
 **Legal Counsel** is an open-source, teen-friendly legal education prototype built in Python and Streamlit. The interface in this repository is a Streamlit-native migration of the supplied Legal Counsel UI design, preserving its soft teal/coral visual system, **Nova** assistant, Voicebox, Chatbox, Minigames, and Progress Gavel concepts while connecting them to the existing Python legal-learning and safety engine.
 
